@@ -1,4 +1,7 @@
-import type { MetaFunction } from '@remix-run/node';
+import { type MetaFunction, type LoaderFunction, json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+
+import { trpc } from '~/trpc';
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,10 +10,17 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader: LoaderFunction = async () => {
+  return json({});
+};
+
 export default function Index() {
+  // const { user } = useLoaderData<typeof loader>();
+  const userQuery = trpc.getUser.useQuery('1');
+
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
-      <h1>Welcome to Remix</h1>
+      <h1>Welcome to Remix! {userQuery?.data?.name}</h1>
       <ul>
         <li>
           <a

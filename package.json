@@ -6,7 +6,7 @@
   "scripts": {
     "format:client": "biome format ./app/*.tsx ./app/**/*.tsx ./app/*.ts ./app/**/*.ts --write",
     "format:server": "biome format ./src/*.ts ./src/**/*.ts --write",
-    "build": "tsc --noEmit && npm run build:client && npm run build:server",
+    "build": "tsc --noEmit && biome lint ./src ./app && npm run build:client && npm run build:server",
     "build:client": "remix vite:build",
     "build:server": "tsup",
     "dev": "tsx --watch --watch-path=./src ./src/main.ts",
@@ -18,11 +18,16 @@
     "@remix-run/express": "^2.9.1",
     "@remix-run/node": "^2.9.1",
     "@remix-run/react": "^2.9.1",
+    "@tanstack/react-query": "^4.36.1",
+    "@trpc/client": "^10.45.2",
+    "@trpc/react-query": "^10.45.2",
+    "@trpc/server": "^10.45.2",
     "compression": "^1.7.4",
     "express": "^4.18.2",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.7.3",

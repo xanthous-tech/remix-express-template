@@ -5,6 +5,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { httpBatchLink } from '@trpc/client';
+import { useState } from 'react';
+
+import { trpc } from '~/trpc';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -25,5 +30,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const [queryClient] = useState(() => new QueryClient());
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      links: [
+        httpBatchLink({
+          url: '/trpc',
+          // You can pass any HTTP headers you wish here
+          // async headers() {
+          //   return {
+          //     authorization: getAuthCookie(),
+          //   };
+          // },
+        }),
+      ],
+    }),
+  );
+
+  return (
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <Outlet />
+      </QueryClientProvider>
+    </trpc.Provider>
+  );
 }

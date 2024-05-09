@@ -1,5 +1,7 @@
 import { createRequestHandler } from '@remix-run/express';
 import { ServerBuild, installGlobals } from '@remix-run/node';
+import { trpc } from './trpc';
+
 import compression from 'compression';
 import express from 'express';
 
@@ -41,6 +43,9 @@ if (viteDevServer) {
 // Everything else (like favicon.ico) is cached for an hour. You may want to be
 // more aggressive with this caching.
 app.use(express.static('build/client', { maxAge: '1h' }));
+
+// handle trpc requests
+app.use('/trpc', trpc);
 
 // handle SSR requests
 app.all('*', remixHandler);

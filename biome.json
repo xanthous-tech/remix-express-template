@@ -27,6 +27,7 @@
         "noChildrenProp": "off"
       },
       "style": {
+        "noParameterAssign": "warn",
         "noUnusedTemplateLiteral": "off",
         "useImportType": "off"
       },
