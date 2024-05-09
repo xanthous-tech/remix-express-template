@@ -4,10 +4,12 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "npm run build:client && npm run build:server",
+    "format:client": "biome format ./app/*.tsx ./app/**/*.tsx ./app/*.ts ./app/**/*.ts --write",
+    "format:server": "biome format ./src/*.ts ./src/**/*.ts --write",
+    "build": "tsc --noEmit && npm run build:client && npm run build:server",
     "build:client": "remix vite:build",
     "build:server": "tsup",
-    "dev": "node ./server.js",
+    "dev": "tsx --watch --watch-path=./src ./src/main.ts",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "typecheck": "tsc"
@@ -23,6 +25,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.7.3",
     "@remix-run/dev": "^2.9.1",
     "@types/compression": "^1.7.5",
     "@types/express": "^4.17.20",
@@ -31,13 +34,8 @@
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
     "cross-env": "^7.0.3",
-    "eslint": "^8.38.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "tsup": "^8.0.2",
+    "tsx": "^4.9.3",
     "typescript": "^5.1.6",
     "vite": "^5.1.0",
     "vite-tsconfig-paths": "^4.2.1"
