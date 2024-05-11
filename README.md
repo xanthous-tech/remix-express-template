@@ -1,34 +1,23 @@
-# Welcome to Remix + Vite!
+# Remix + Express Boilerplate
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+This is a boilerplate for building web applications with [Remix](https://remix.run) and [Express](https://expressjs.com/).
 
-## Development
+## Overview
 
-Run the Express server with Vite dev middleware:
+I plan to add the following:
 
-```shellscript
-npm run dev
-```
+- [x] Express.js
+- [x] Remix + Vite
+- [x] TypeScript
+- [x] tRPC
+- [ ] DrizzleORM
+- [ ] BullMQ
+- [ ] Minio
+- [ ] TailwindCSS
+- [ ] Radix UI Theme
+- [ ] shadcn/ui
+- [ ] Auth (via Lucia or remix-auth)
+- [x] BiomeJS
+- [x] tsup
 
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Express applications you should be right at home. Just make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
+This covers all I need for building an app with a web frontend and an API backend.
