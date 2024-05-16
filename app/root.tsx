@@ -35,7 +35,7 @@ export default function App() {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: '/trpc',
+          url: '/api/trpc',
           // You can pass any HTTP headers you wish here
           // async headers() {
           //   return {

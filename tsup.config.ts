@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["./src/main.ts"],
+  entry: ["./src/main.ts", "./src/db-migrate.ts"],
   platform: "node",
   target: "esnext",
   format: ["esm"],
@@ -10,4 +10,5 @@ export default defineConfig({
   legacyOutput: false,
   splitting: false,
   sourcemap: true,
+  shims: true,
 });

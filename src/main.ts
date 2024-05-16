@@ -45,7 +45,7 @@ if (viteDevServer) {
 app.use(express.static('build/client', { maxAge: '1h' }));
 
 // handle trpc requests
-app.use('/trpc', trpc);
+app.use('/api/trpc', trpc);
 
 // handle SSR requests
 app.all('*', remixHandler);
