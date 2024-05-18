@@ -18,7 +18,10 @@ const viteDevServer =
 
 const remixHandler = createRequestHandler({
   build: viteDevServer
-    ? () => viteDevServer.ssrLoadModule('virtual:remix/server-build') as Promise<ServerBuild>
+    ? () =>
+        viteDevServer.ssrLoadModule(
+          'virtual:remix/server-build',
+        ) as Promise<ServerBuild>
     : await import('../build/server/index.js'),
 });
 
