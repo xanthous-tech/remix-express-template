@@ -65,6 +65,10 @@ app.use('/api/auth', authRouter);
 // handle bull-board requests
 app.use('/ctrls', serverAdapter.getRouter());
 
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
 // handle SSR requests
 app.all('*', remixHandler);
 

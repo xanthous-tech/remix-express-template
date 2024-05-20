@@ -5,13 +5,18 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
+import { LinksFunction } from '@remix-run/node';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 import { useState } from 'react';
 
 import { trpc } from '~/trpc';
 
-import './globals.css';
+import { SiteHeader } from '~/components/site-header';
+
+import styles from './globals.css?url';
+
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -52,6 +57,7 @@ export default function App() {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
+        <SiteHeader />
         <Outlet />
       </QueryClientProvider>
     </trpc.Provider>

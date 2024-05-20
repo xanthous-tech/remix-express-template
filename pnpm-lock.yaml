@@ -8,18 +8,45 @@ importers:
 
   .:
     dependencies:
+      '@bull-board/api':
+        specifier: ^5.17.1
+        version: 5.17.1(@bull-board/ui@5.17.1)
+      '@bull-board/express':
+        specifier: ^5.17.1
+        version: 5.17.1
+      '@radix-ui/react-slot':
+        specifier: ^1.0.2
+        version: 1.0.2(@types/react@18.3.1)(react@18.3.1)
       '@remix-run/express':
         specifier: ^2.9.1
         version: 2.9.1(express@4.19.2)(typescript@5.4.5)
       '@remix-run/node':
         specifier: ^2.9.1
         version: 2.9.1(typescript@5.4.5)
+      bullmq:
+        specifier: ^5.7.8
+        version: 5.7.8
       compression:
         specifier: ^1.7.4
         version: 1.7.4
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       express:
         specifier: ^4.18.2
         version: 4.19.2
+      ioredis:
+        specifier: ^5.4.1
+        version: 5.4.1
+      pino:
+        specifier: ^9.1.0
+        version: 9.1.0
+      pino-http:
+        specifier: ^10.1.0
+        version: 10.1.0
+      pino-pretty:
+        specifier: ^11.0.0
+        version: 11.0.0
       vite:
         specifier: ^5.1.0
         version: 5.2.11(@types/node@20.12.11)
@@ -27,12 +54,6 @@ importers:
       '@biomejs/biome':
         specifier: ^1.7.3
         version: 1.7.3
-      '@bull-board/api':
-        specifier: ^5.17.1
-        version: 5.17.1(@bull-board/ui@5.17.1)
-      '@bull-board/express':
-        specifier: ^5.17.1
-        version: 5.17.1
       '@lucia-auth/adapter-drizzle':
         specifier: ^1.0.7
         version: 1.0.7(lucia@3.2.0)
@@ -69,9 +90,9 @@ importers:
       arctic:
         specifier: ^1.8.1
         version: 1.8.1
-      bullmq:
-        specifier: ^5.7.8
-        version: 5.7.8
+      autoprefixer:
+        specifier: ^10.4.19
+        version: 10.4.19(postcss@8.4.38)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -81,9 +102,6 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
-      dotenv:
-        specifier: ^16.4.5
-        version: 16.4.5
       drizzle-kit:
         specifier: ^0.21.2
         version: 0.21.2
@@ -93,9 +111,6 @@ importers:
       drizzle-zod:
         specifier: ^0.5.1
         version: 0.5.1(drizzle-orm@0.30.10(@types/react@18.3.1)(postgres@3.4.4)(react@18.3.1))(zod@3.23.8)
-      ioredis:
-        specifier: ^5.4.1
-        version: 5.4.1
       isbot:
         specifier: ^4.1.0
         version: 4.4.0
@@ -114,15 +129,9 @@ importers:
       oslo:
         specifier: ^1.2.0
         version: 1.2.0
-      pino:
-        specifier: ^9.1.0
-        version: 9.1.0
-      pino-http:
-        specifier: ^10.1.0
-        version: 10.1.0
-      pino-pretty:
-        specifier: ^11.0.0
-        version: 11.0.0
+      postcss:
+        specifier: ^8.4.38
+        version: 8.4.38
       postgres:
         specifier: ^3.4.4
         version: 3.4.4
@@ -1220,6 +1229,24 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
+  '@radix-ui/react-compose-refs@1.0.1':
+    resolution: {integrity: sha512-fDSBgd44FKHa1FRMU59qBMPFcl2PZE+2nmqunj+BWFyYYjnhIDWL2ItDs3rrbJDQOtzt5nIebLCQc4QRfz6LJw==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@radix-ui/react-slot@1.0.2':
+    resolution: {integrity: sha512-YeTpuq4deV+6DusvVUW4ivBgnkHwECUu0BiN43L5UCDFgdhsRUWAghhTF5MbvNTPzmiFOx90asDSUjWuCNapwg==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   '@remix-run/dev@2.9.1':
     resolution: {integrity: sha512-/YhegnnRrarsqU+11+HdGwjcIT1KgkS9L7kWCM0+ivDvyiBYAuI6xbPG/q/FY6LqLAPYeOxsJmUNl+aj+yMltA==}
     engines: {node: '>=18.0.0'}
@@ -1582,6 +1609,13 @@ packages:
   atomic-sleep@1.0.0:
     resolution: {integrity: sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==}
     engines: {node: '>=8.0.0'}
+
+  autoprefixer@10.4.19:
+    resolution: {integrity: sha512-BaENR2+zBZ8xXhM4pUaKUxlVdxZ0EZhjvbopwnXmxRUfqDmwSpC2lAi/QXvx7NRdPCo1WKEcEF6mV64si1z4Ew==}
+    engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
+    peerDependencies:
+      postcss: ^8.1.0
 
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
@@ -2258,6 +2292,9 @@ packages:
   forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
+
+  fraction.js@4.3.7:
+    resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
@@ -2987,6 +3024,10 @@ packages:
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
+    engines: {node: '>=0.10.0'}
+
+  normalize-range@0.1.2:
+    resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
 
   npm-install-checks@6.3.0:
@@ -4814,6 +4855,21 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+  '@radix-ui/react-compose-refs@1.0.1(@types/react@18.3.1)(react@18.3.1)':
+    dependencies:
+      '@babel/runtime': 7.24.5
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.1
+
+  '@radix-ui/react-slot@1.0.2(@types/react@18.3.1)(react@18.3.1)':
+    dependencies:
+      '@babel/runtime': 7.24.5
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.3.1)(react@18.3.1)
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.1
+
   '@remix-run/dev@2.9.1(@remix-run/react@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5))(@types/node@20.12.11)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.11))':
     dependencies:
       '@babel/core': 7.24.5
@@ -5242,6 +5298,16 @@ snapshots:
   async@3.2.5: {}
 
   atomic-sleep@1.0.0: {}
+
+  autoprefixer@10.4.19(postcss@8.4.38):
+    dependencies:
+      browserslist: 4.23.0
+      caniuse-lite: 1.0.30001617
+      fraction.js: 4.3.7
+      normalize-range: 0.1.2
+      picocolors: 1.0.0
+      postcss: 8.4.38
+      postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
     dependencies:
@@ -5970,6 +6036,8 @@ snapshots:
   format@0.2.2: {}
 
   forwarded@0.2.0: {}
+
+  fraction.js@4.3.7: {}
 
   fresh@0.5.2: {}
 
@@ -6862,6 +6930,8 @@ snapshots:
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
+
+  normalize-range@0.1.2: {}
 
   npm-install-checks@6.3.0:
     dependencies:
