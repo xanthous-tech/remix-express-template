@@ -5,12 +5,15 @@ import express from 'express';
 import compression from 'compression';
 
 import { IS_PROD } from './config/server';
-import { trpc } from './trpc';
-import { serverAdapter } from './queues';
 import { httpLogger, logger as parentLogger } from './utils/logger';
-import { authMiddleware, authRouter } from './middlewares/auth';
+import { trpc } from './trpc';
+import { bullboardServerAdapter } from './queues';
+import {
+  authMiddleware,
+  authRouter,
+  bullBoardAuthMiddleware,
+} from './middlewares/auth';
 import './workers/register';
-import { bullBoardMiddleware } from './middlewares/auth/bull-board';
 
 installGlobals();
 const logger = parentLogger.child({ component: 'main' });
@@ -71,7 +74,7 @@ app.use('/api/trpc', trpc);
 app.use('/api/auth', authRouter);
 
 // handle bull-board requests
-app.use('/ctrls', bullBoardMiddleware, serverAdapter.getRouter());
+app.use('/ctrls', bullBoardAuthMiddleware, bullboardServerAdapter.getRouter());
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });

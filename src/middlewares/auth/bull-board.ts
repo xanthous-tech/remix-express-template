@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { Role } from '@/types/roles';
 
-export const bullBoardMiddleware = (
+export const bullBoardAuthMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
