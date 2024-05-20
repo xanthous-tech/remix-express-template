@@ -18,13 +18,14 @@ CREATE TABLE IF NOT EXISTS "session" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user" (
 	"id" text PRIMARY KEY NOT NULL,
-	"email" text NOT NULL,
+	"email" text,
 	"password" text,
 	"name" text,
 	"image" text,
 	"customer_id" text,
+	"role_level" integer DEFAULT 0,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	CONSTRAINT "user_email_unique" UNIQUE("email")
+	CONSTRAINT "uniqueOnEmail" UNIQUE("email")
 );
 --> statement-breakpoint
 DO $$ BEGIN

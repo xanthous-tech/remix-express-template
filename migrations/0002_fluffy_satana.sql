@@ -1,1 +1,0 @@
-ALTER TABLE "user" ADD COLUMN "role_level" integer DEFAULT 0;
