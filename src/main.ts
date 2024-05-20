@@ -10,6 +10,7 @@ import { serverAdapter } from './queues';
 import { httpLogger, logger as parentLogger } from './utils/logger';
 import { authMiddleware, authRouter } from './middlewares/auth';
 import './workers/register';
+import { bullBoardMiddleware } from './middlewares/auth/bull-board';
 
 installGlobals();
 const logger = parentLogger.child({ component: 'main' });
@@ -70,7 +71,7 @@ app.use('/api/trpc', trpc);
 app.use('/api/auth', authRouter);
 
 // handle bull-board requests
-app.use('/ctrls', serverAdapter.getRouter());
+app.use('/ctrls', bullBoardMiddleware, serverAdapter.getRouter());
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });

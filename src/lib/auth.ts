@@ -23,6 +23,7 @@ export const auth = new Lucia(adapter, {
       email: attributes.email,
       name: attributes.name,
       image: attributes.image,
+      roleLevel: attributes.roleLevel,
     };
   },
 });
@@ -63,6 +64,7 @@ export interface DatabaseUserAttributes {
   email?: string;
   name?: string;
   image?: string;
+  roleLevel: number;
 }
 
 declare module 'lucia' {
