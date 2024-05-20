@@ -13,7 +13,7 @@ const createContext = ({
 }: trpcExpress.CreateExpressContextOptions) => ({
   user: res.locals.user,
   session: res.locals.session,
-}); // no context
+});
 type Context = Awaited<ReturnType<typeof createContext>>;
 export const t = initTRPC.context<Context>().meta<Meta>().create();
 

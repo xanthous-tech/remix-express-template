@@ -10,8 +10,11 @@ I plan to add the following:
 - [x] Remix + Vite
 - [x] TypeScript
 - [x] tRPC
-- [x] DrizzleORM
-- [x] BullMQ
+- [ ] tRPC OpenAPI (for app requests)
+- [x] Postgres
+- [x] DrizzleORM (to operate Postgres)
+- [x] Redis
+- [x] BullMQ (via Redis)
 - [x] Minio
 - [x] TailwindCSS
 - [ ] Radix UI Theme
@@ -19,5 +22,8 @@ I plan to add the following:
 - [x] Auth (via Lucia or remix-auth)
 - [x] BiomeJS
 - [x] tsup
+- [ ] Stripe
+- [ ] Emails (via Resend / Cloudflare + MailChannels)
+  - [ ] Magic Link / OTP
 
 This covers all I need for building an app with a web frontend and an API backend.
