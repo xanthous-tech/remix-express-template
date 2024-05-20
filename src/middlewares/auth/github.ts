@@ -10,6 +10,7 @@ import { Router } from 'express';
 import { eq, and } from 'drizzle-orm';
 
 import { APP_URL, IS_PROD } from '@/config/server';
+import { logger as parentLogger } from '@/utils/logger';
 import { db } from '@/db/drizzle';
 import { accountTable, userTable } from '@/db/schema';
 import { auth } from '@/lib/auth';
@@ -19,11 +20,13 @@ export interface GitHubUser {
   login: string;
 }
 
+const logger = parentLogger.child({ module: 'github-auth' });
+
 export const github = new GitHub(
   process.env.GITHUB_CLIENT_ID ?? 'invalidClientId',
   process.env.GITHUB_CLIENT_SECRET ?? 'invalidClientSecret',
   {
-    redirectURI: `${APP_URL}/auth/github/callback`,
+    redirectURI: `${APP_URL}/api/auth/github/callback`,
   },
 );
 
@@ -145,6 +148,7 @@ githubAuthRouter.get('/callback', async (req, res) => {
       .appendHeader('Set-Cookie', cookie.serialize())
       .redirect(callbackUrl);
   } catch (e) {
+    logger.error(e);
     if (
       e instanceof OAuth2RequestError &&
       e.message === 'bad_verification_code'

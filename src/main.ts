@@ -4,6 +4,7 @@ import { createRequestHandler } from '@remix-run/express';
 import express from 'express';
 import compression from 'compression';
 
+import { IS_PROD } from './config/server';
 import { trpc } from './trpc';
 import { serverAdapter } from './queues';
 import { httpLogger, logger as parentLogger } from './utils/logger';
@@ -13,14 +14,13 @@ import './workers/register';
 installGlobals();
 const logger = parentLogger.child({ component: 'main' });
 
-const viteDevServer =
-  process.env.NODE_ENV === 'production'
-    ? undefined
-    : await import('vite').then((vite) =>
-        vite.createServer({
-          server: { middlewareMode: true },
-        }),
-      );
+const viteDevServer = IS_PROD
+  ? undefined
+  : await import('vite').then((vite) =>
+      vite.createServer({
+        server: { middlewareMode: true },
+      }),
+    );
 
 const remixHandler = createRequestHandler({
   build: viteDevServer
@@ -34,7 +34,9 @@ const remixHandler = createRequestHandler({
 const app = express();
 
 app.use(compression());
-app.use(httpLogger);
+if (IS_PROD) {
+  app.use(httpLogger);
+}
 
 // http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
 app.disable('x-powered-by');
