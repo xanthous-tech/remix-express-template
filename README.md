@@ -10,13 +10,13 @@ I plan to add the following:
 - [x] Remix + Vite
 - [x] TypeScript
 - [x] tRPC
-- [ ] DrizzleORM
-- [ ] BullMQ
-- [ ] Minio
-- [ ] TailwindCSS
+- [x] DrizzleORM
+- [x] BullMQ
+- [x] Minio
+- [x] TailwindCSS
 - [ ] Radix UI Theme
-- [ ] shadcn/ui
-- [ ] Auth (via Lucia or remix-auth)
+- [x] shadcn/ui
+- [x] Auth (via Lucia or remix-auth)
 - [x] BiomeJS
 - [x] tsup
 
