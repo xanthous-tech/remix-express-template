@@ -19,7 +19,7 @@ I plan to add the following:
 - [x] TailwindCSS
 - [ ] Radix UI Theme
 - [x] shadcn/ui
-- [x] Auth (via Lucia or remix-auth)
+- [x] Auth (via Lucia)
 - [x] BiomeJS
 - [x] tsup
 - [ ] Stripe
