@@ -15,20 +15,11 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader: LoaderFunction = async (args) => {
-  const payload = await validateSession(args);
-  const headers: HeadersInit = {};
-  if (payload.sessionCookie) {
-    headers['Set-Cookie'] = payload.sessionCookie.serialize();
-  }
+  await validateSession(args);
 
-  return json(
-    {
-      user: payload.user,
-    },
-    {
-      headers,
-    },
-  );
+  return json({
+    user: args.context.user,
+  });
 };
 
 export default function Index() {

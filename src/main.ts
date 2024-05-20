@@ -8,7 +8,7 @@ import { IS_PROD } from './config/server';
 import { trpc } from './trpc';
 import { serverAdapter } from './queues';
 import { httpLogger, logger as parentLogger } from './utils/logger';
-import { authRouter } from './middlewares/auth';
+import { authMiddleware, authRouter } from './middlewares/auth';
 import './workers/register';
 
 installGlobals();
@@ -23,6 +23,10 @@ const viteDevServer = IS_PROD
     );
 
 const remixHandler = createRequestHandler({
+  getLoadContext: (req, res) => ({
+    user: res.locals.user,
+    session: res.locals.session,
+  }),
   build: viteDevServer
     ? () =>
         viteDevServer.ssrLoadModule(
@@ -55,6 +59,9 @@ if (viteDevServer) {
 // Everything else (like favicon.ico) is cached for an hour. You may want to be
 // more aggressive with this caching.
 app.use(express.static('build/client', { maxAge: '1h' }));
+
+// auth middleware (injects user and session into req)
+app.use(authMiddleware);
 
 // handle trpc requests
 app.use('/api/trpc', trpc);
