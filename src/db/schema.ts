@@ -1,12 +1,15 @@
-import { pgTable, timestamp, text, unique } from 'drizzle-orm/pg-core';
+import { pgTable, timestamp, text, unique, integer } from 'drizzle-orm/pg-core';
+
+import { Role } from '@/types/roles';
 
 export const userTable = pgTable('user', {
   id: text('id').primaryKey(),
-  email: text('email').notNull().unique(),
+  email: text('email').unique('uniqueOnEmail', { nulls: 'distinct' }),
   password: text('password'),
   name: text('name'),
   image: text('image'),
   customerId: text('customer_id'),
+  roleLevel: integer('role_level').default(Role.User),
   createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' })
     .defaultNow()
     .notNull(),

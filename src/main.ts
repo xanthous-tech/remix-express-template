@@ -7,6 +7,7 @@ import compression from 'compression';
 import { trpc } from './trpc';
 import { serverAdapter } from './queues';
 import { httpLogger, logger as parentLogger } from './utils/logger';
+import { authRouter } from './middlewares/auth';
 import './workers/register';
 
 installGlobals();
@@ -55,6 +56,9 @@ app.use(express.static('build/client', { maxAge: '1h' }));
 
 // handle trpc requests
 app.use('/api/trpc', trpc);
+
+// handle server-side auth redirects
+app.use('/api/auth', authRouter);
 
 // handle bull-board requests
 app.use('/ctrls', serverAdapter.getRouter());
