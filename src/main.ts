@@ -3,20 +3,23 @@ import { ServerBuild, installGlobals } from '@remix-run/node';
 import { createRequestHandler } from '@remix-run/express';
 import express from 'express';
 import compression from 'compression';
+import swaggerUi from 'swagger-ui-express';
 
 import { IS_PROD } from './config/server';
 import { httpLogger, logger as parentLogger } from './utils/logger';
-import { trpc } from './trpc';
+import { openApiDocument, openApiRouter, trpc } from './trpc';
 import { bullboardServerAdapter } from './queues';
+import { workers } from './workers/register';
 import {
   authMiddleware,
   authRouter,
   bullBoardAuthMiddleware,
 } from './middlewares/auth';
-import './workers/register';
 
 installGlobals();
 const logger = parentLogger.child({ component: 'main' });
+
+logger.info(`imported workers: ${workers.map((w) => w.name).join(', ')}`);
 
 const viteDevServer = IS_PROD
   ? undefined
@@ -31,6 +34,7 @@ const remixHandler = createRequestHandler({
     user: res.locals.user,
     session: res.locals.session,
   }),
+  // @ts-ignore
   build: viteDevServer
     ? () =>
         viteDevServer.ssrLoadModule(
@@ -73,9 +77,17 @@ app.use('/api/trpc', trpc);
 // handle server-side auth redirects
 app.use('/api/auth', authRouter);
 
+// handle trpc-openapi
+app.use('/api', openApiRouter);
+
+// swagger docs
+app.use('/docs', swaggerUi.serve);
+app.get('/docs', swaggerUi.setup(openApiDocument));
+
 // handle bull-board requests
 app.use('/ctrls', bullBoardAuthMiddleware, bullboardServerAdapter.getRouter());
 
+// health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });

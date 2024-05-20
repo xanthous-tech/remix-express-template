@@ -10,7 +10,7 @@ I plan to add the following:
 - [x] Remix + Vite
 - [x] TypeScript
 - [x] tRPC
-- [ ] tRPC OpenAPI (for app requests)
+- [x] tRPC OpenAPI (for app requests)
 - [x] Postgres
 - [x] DrizzleORM (to operate Postgres)
 - [x] Redis

@@ -1,4 +1,4 @@
-export function AppleIcon({ className }) {
+export function AppleIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}

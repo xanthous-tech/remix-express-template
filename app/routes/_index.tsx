@@ -26,7 +26,7 @@ export default function Index() {
   const data = useLoaderData<typeof loader>();
   const navigate = useNavigate();
   const location = useLocation();
-  const userQuery = trpc.getUser.useQuery('1');
+  const userQuery = trpc.getUser.useQuery({ id: '1' });
 
   useEffect(() => {
     if (!data.user) {
