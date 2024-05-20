@@ -1,11 +1,16 @@
-import { createRequestHandler } from '@remix-run/express';
+import 'dotenv/config';
 import { ServerBuild, installGlobals } from '@remix-run/node';
-import { trpc } from './trpc';
-
-import compression from 'compression';
+import { createRequestHandler } from '@remix-run/express';
 import express from 'express';
+import compression from 'compression';
+
+import { trpc } from './trpc';
+import { serverAdapter } from './queues';
+import { httpLogger, logger as parentLogger } from './utils/logger';
+import './workers/register';
 
 installGlobals();
+const logger = parentLogger.child({ component: 'main' });
 
 const viteDevServer =
   process.env.NODE_ENV === 'production'
@@ -28,6 +33,7 @@ const remixHandler = createRequestHandler({
 const app = express();
 
 app.use(compression());
+app.use(httpLogger);
 
 // http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
 app.disable('x-powered-by');
@@ -50,10 +56,13 @@ app.use(express.static('build/client', { maxAge: '1h' }));
 // handle trpc requests
 app.use('/api/trpc', trpc);
 
+// handle bull-board requests
+app.use('/ctrls', serverAdapter.getRouter());
+
 // handle SSR requests
 app.all('*', remixHandler);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () =>
-  console.log(`Express server listening at http://localhost:${port}`),
+  logger.info(`Express server listening at http://localhost:${port}`),
 );
