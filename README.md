@@ -22,8 +22,8 @@ I plan to add the following:
 - [x] Auth (via Lucia)
 - [x] BiomeJS
 - [x] tsup
-- [ ] Stripe
+- [x] Stripe
 - [ ] Emails (via Resend / Cloudflare + MailChannels)
-  - [ ] Magic Link / OTP
+  - [x] Magic Link / OTP
 
 This covers all I need for building an app with a web frontend and an API backend.
