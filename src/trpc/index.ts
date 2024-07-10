@@ -43,8 +43,8 @@ export const openApiRouter = createOpenApiExpressMiddleware({
 
 // Generate OpenAPI schema document
 export const openApiDocument = generateOpenApiDocument(appRouter, {
-  title: 'Serenity Sage API',
-  description: 'Serenity Sage API',
+  title: 'Remix Express Template API',
+  description: 'This is the OpenAPI spec for the Remix Express Template API (backed by tRPC).',
   version: '1.0.0',
   baseUrl: `${APP_URL}/api`,
   // tags: ['auth', 'users', 'posts'],
