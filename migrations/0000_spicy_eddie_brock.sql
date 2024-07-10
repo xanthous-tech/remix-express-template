@@ -1,13 +1,20 @@
 CREATE TABLE IF NOT EXISTS "account" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
 	"user_id" text NOT NULL,
-	"provider" text NOT NULL,
-	"provider_account_id" text NOT NULL,
+	"provider" varchar NOT NULL,
+	"provider_account_id" varchar NOT NULL,
 	"id_token" text,
 	"refresh_token" text,
 	"access_token" text,
 	"expires_at" timestamp with time zone,
 	CONSTRAINT "account_provider_provider_account_id_unique" UNIQUE("provider","provider_account_id")
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "magic_link_token" (
+	"id" varchar PRIMARY KEY NOT NULL,
+	"email" text NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"expires_at" timestamp with time zone NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "session" (
@@ -17,7 +24,7 @@ CREATE TABLE IF NOT EXISTS "session" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
 	"email" text,
 	"password" text,
 	"name" text,
