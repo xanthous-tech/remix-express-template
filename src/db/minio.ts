@@ -7,7 +7,7 @@ export const minio = new Client({
   accessKey: process.env.MINIO_ACCESS_KEY ?? 'minio',
   secretKey: process.env.MINIO_SECRET_KEY ?? 'minio123',
   region: process.env.MINIO_REGION,
-  useSSL: process.env.MINIO_USE_SSL === 'true',
+  useSSL: !(process.env.MINIO_DISABLE_SSL === 'true'),
 });
 
 export function listObjectsV2$(
