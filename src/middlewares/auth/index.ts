@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-import { githubAuthRouter } from './github';
 import { auth, getSessionCookieFromSession } from '@/lib/auth';
+import { githubAuthRouter } from './github';
 
 export * from './bull-board';
 
