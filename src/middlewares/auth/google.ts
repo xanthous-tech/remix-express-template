@@ -151,8 +151,6 @@ async function getSessionCookieFromGoogleUser(googleUser: GoogleUser) {
 googleAuthRouter.get('/login', async (req, res) => {
   const { state, codeVerifier, url } = await getGoogleAuthorizationUrl();
 
-  console.log({ state, codeVerifier, url });
-
   res
     .appendHeader('Set-Cookie', createGoogleStateCookie(state).serialize())
     .appendHeader(
