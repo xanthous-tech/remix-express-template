@@ -48,7 +48,7 @@ export function createCallbackUrlCookie(callbackUrl: string) {
     secure: IS_PROD,
     httpOnly: true,
     maxAge: 60 * 10,
-    sameSite: 'strict',
+    sameSite: 'none',
   });
 }
 

@@ -142,7 +142,7 @@ githubAuthRouter.get('/callback', async (req, res) => {
 
     const cookie = await getSessionCookieFromGitHubUser(githubUser);
 
-    const callbackUrl = cookies.get('auth_callback_url') ?? '/';
+    const callbackUrl = cookies.get('auth_callback_url') ?? '/dashboard';
 
     return res
       .appendHeader('Set-Cookie', cookie.serialize())

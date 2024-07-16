@@ -14,7 +14,7 @@ import { auth } from '@/lib/auth';
 import { createStripeCustomer } from '@/lib/stripe';
 
 export interface AppleUser {
-  name: { firstName: string; lastName: string };
+  name?: { firstName: string; lastName: string };
   email: string;
   id: string;
 }
@@ -52,13 +52,13 @@ function createAppleStateCookie(state: string) {
     secure: IS_PROD,
     httpOnly: true,
     maxAge: 60 * 10,
-    sameSite: 'lax',
+    sameSite: 'none',
   });
 }
 
 async function getAppleUser(
   tokens: AppleTokens,
-  user: Pick<AppleUser, 'name'>,
+  user?: Pick<AppleUser, 'name'>,
 ): Promise<AppleUser> {
   // this.logger.debug(JSON.stringify(parseJWT(tokens.idToken)));
   const refreshedTokens = await apple.refreshAccessToken(
@@ -71,7 +71,7 @@ async function getAppleUser(
   }
 
   return {
-    name: user.name,
+    name: user?.name,
     email: (jwt.payload as any).email as string,
     id: jwt.subject,
   };
@@ -103,7 +103,9 @@ async function getSessionCookieFromAppleUser(appleUser: AppleUser) {
         .insert(userTable)
         .values({
           id: userId,
-          name: `${appleUser.name.firstName} ${appleUser.name.lastName}`,
+          name: appleUser.name
+            ? `${appleUser.name.firstName} ${appleUser.name.lastName}`
+            : undefined,
           email: appleUser.email,
           customerId: stripeCustomer.id,
         })
@@ -152,6 +154,8 @@ appleAuthRouter.get('/login', async (req, res) => {
 
 appleAuthRouter.post('/callback', bodyParser.urlencoded(), async (req, res) => {
   const { code, state, user } = req.body;
+
+  logger.info(req.body);
 
   const cookies = parseCookies(req.headers.cookie ?? '');
   const storedState = cookies.get('apple_oauth_state') ?? null;

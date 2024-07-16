@@ -1,16 +1,13 @@
 import { json, type LoaderFunction, type MetaFunction } from '@remix-run/node';
-import { useLoaderData, useLocation, useNavigate } from '@remix-run/react';
-import { useEffect } from 'react';
+import { useLoaderData } from '@remix-run/react';
 
-import { Button } from '~/components/ui/button';
-
-import { trpc } from '~/trpc';
 import { validateSession } from '~/lib/session.server';
+import { trpc } from '~/trpc';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Smart Bookmarks' },
-    { name: 'description', content: 'AI-managed bookmarks' },
+    { title: 'Remix Express Template' },
+    { name: 'description', content: 'Remix Express Template' },
   ];
 };
 
@@ -24,15 +21,7 @@ export const loader: LoaderFunction = async (args) => {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
-  const navigate = useNavigate();
-  const location = useLocation();
   const userQuery = trpc.getUser.useQuery({ id: '1' });
-
-  useEffect(() => {
-    if (!data.user) {
-      navigate(`/signin?callbackUrl=${location.pathname}`);
-    }
-  }, [data, navigate, location.pathname]);
 
   return (
     <div className='m-4'>
