@@ -4,16 +4,16 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "tsc --noEmit && biome lint ./src ./app && npm run build:client && npm run build:server",
+    "build": "npm run build:client && npm run build:server",
     "build:client": "remix vite:build",
     "build:server": "tsup",
     "db:migrate": "node ./dist/db-migrate.js",
     "dev": "cross-env NODE_ENV=development tsx --watch --watch-path=./src ./src/main.ts",
     "format:client": "biome format ./app/*.tsx ./app/**/*.tsx ./app/*.ts ./app/**/*.ts --write",
     "format:server": "biome format ./src/*.ts ./src/**/*.ts --write",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "biome lint ./src ./app",
     "start": "cross-env NODE_ENV=production node ./dist/main.js",
-    "typecheck": "tsc"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@bull-board/api": "^5.20.5",
