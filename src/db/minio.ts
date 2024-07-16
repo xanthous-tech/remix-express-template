@@ -59,6 +59,10 @@ export async function moveObject(
   objectName: string,
   newObjectName: string,
 ) {
+  if (objectName === newObjectName) {
+    return;
+  }
+
   const conditions = new CopyConditions();
   await minio.copyObject(
     bucketName,
