@@ -10,7 +10,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 import { useState } from 'react';
 
-import { trpc } from '~/trpc';
+import { trpc } from '~/lib/trpc';
 
 import { SiteHeader } from '~/components/site-header';
 
