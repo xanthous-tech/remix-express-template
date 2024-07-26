@@ -15,6 +15,7 @@ import {
   authRouter,
   bullBoardAuthMiddleware,
 } from './middlewares/auth';
+import { paymentRouter } from './middlewares/payment';
 
 installGlobals();
 const logger = parentLogger.child({ component: 'main' });
