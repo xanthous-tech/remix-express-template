@@ -7,7 +7,9 @@ import { emailQueue } from './email';
 export const bullboardServerAdapter = new ExpressAdapter();
 bullboardServerAdapter.setBasePath('/ctrls');
 
+const queues = [emailQueue].map((queue) => new BullMQAdapter(queue));
+
 createBullBoard({
   serverAdapter: bullboardServerAdapter,
-  queues: [new BullMQAdapter(emailQueue)],
+  queues,
 });
