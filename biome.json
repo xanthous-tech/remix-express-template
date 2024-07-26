@@ -19,6 +19,11 @@
       "unsafeParameterDecoratorsEnabled": true
     }
   },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  },
   "linter": {
     "enabled": true,
     "ignore": ["src/translate-utils.ts"],
