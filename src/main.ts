@@ -77,6 +77,9 @@ app.use('/api/trpc', trpc);
 // handle server-side auth redirects
 app.use('/api/auth', authRouter);
 
+// handle stripe webhook
+app.use('/api/payment', paymentRouter);
+
 // handle trpc-openapi
 app.use('/api', openApiRouter);
 
