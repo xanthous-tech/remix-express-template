@@ -1,17 +1,14 @@
 import { Job, Worker } from 'bullmq';
-import { z } from 'zod';
 
-import { EMAIL, emailJobDataSchema } from '@/types/jobs/email';
+import { EMAIL, EmailJobData, emailJobDataSchema } from '@/types/jobs/email';
 import { defaultWorkerOptions } from '@/lib/bullmq';
 import { logger as parentLogger } from '@/utils/logger';
 
 const logger = parentLogger.child({ worker: EMAIL });
 logger.trace(`register worker for queue ${EMAIL}`);
 
-async function emailWorkerProcess(
-  job: Job<z.infer<typeof emailJobDataSchema>>,
-) {
-  const input = emailJobDataSchema.parse(job.data);
+async function emailWorkerProcess(job: Job<EmailJobData>) {
+  const input: EmailJobData = emailJobDataSchema.parse(job.data);
   return input;
 }
 
