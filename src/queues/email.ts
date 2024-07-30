@@ -1,4 +1,5 @@
 import { Queue, QueueEvents } from 'bullmq';
+import { nanoid } from 'nanoid';
 
 import { EMAIL, EmailJobData } from '@/types/jobs/email';
 import { defaultQueueEventsOptions, defaultQueueOptions } from '@/lib/bullmq';
@@ -22,9 +23,6 @@ emailQueueEvents.on('error', (err) => {
 });
 
 export async function email(payload: EmailJobData) {
-  const job = await emailQueue.add(payload.eventId, payload, {
-    jobId: payload.eventId,
-  });
-
+  const job = await emailQueue.add(nanoid(), payload);
   return job.waitUntilFinished(emailQueueEvents);
 }
